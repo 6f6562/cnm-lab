@@ -1,7 +1,21 @@
 const { S3Client, PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 const { v4: uuidv4 } = require("uuid");
 
-const s3 = new S3Client({ region: process.env.AWS_REGION });
+// Cấu hình S3 với credentials riêng nếu có, nếu không thì dùng default
+const s3Config = {
+    region: process.env.AWS_REGION || "us-east-1"
+};
+
+// Nếu có credentials riêng cho S3, sử dụng chúng
+// Nếu không, AWS SDK sẽ tự động lấy từ default credentials chain
+if (process.env.AWS_ACCESS_KEY_ID_S3 && process.env.AWS_SECRET_ACCESS_KEY_S3) {
+    s3Config.credentials = {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID_S3,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY_S3
+    };
+}
+
+const s3 = new S3Client(s3Config);
 
 async function uploadImage(file) {
     const key = `products/${uuidv4()}-${file.originalname}`;

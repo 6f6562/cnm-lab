@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
+    "create-table": "node scripts/create-table.js",
+    "start:local": "node scripts/start-local.js || npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
