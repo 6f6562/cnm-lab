@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Error</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" />
+  </head>
+  <body>
+    <div class="container mx-auto p-4 max-w-2xl">
+      <div class="alert alert-error">
+        <div>
+          <h2 class="font-bold text-xl mb-1">Error</h2>
+          <div><%= message || 'Something went wrong.' %></div>
+        </div>
+      </div>
+
+      <% if (typeof error !== 'undefined' && error && error.stack) { %>
+      <div class="mt-4">
+        <div class="font-bold mb-2">Stack trace</div>
+        <pre class="bg-base-200 p-4 rounded"><%= error.stack %></pre>
+      </div>
+      <% } %>
+
+      <a href="/" class="btn btn-primary mt-6">Back to Products</a>
+    </div>
+  </body>
+</html>
