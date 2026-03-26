@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <%- include('../header') %>
+
+    <main class="flex-1">
+      <div class="container mx-auto p-4 max-w-3xl">
+        <div class="breadcrumbs text-sm mb-4">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">Products</a></li>
+            <li><%= product.name %></li>
+          </ul>
+        </div>
+        <% if (success) { %>
+        <div class="alert alert-success mb-4">
+          <span><%= success %></span>
+        </div>
+        <% } %>
+        <% if (error) { %>
+        <div class="alert alert-error mb-4">
+          <span><%= error %></span>
+        </div>
+        <% } %>
+
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <div class="flex flex-col md:flex-row gap-4 items-start">
+              <div>
+                <% if (product.url_image) { %>
+                <img
+                  src="<%= product.url_image %>"
+                  alt="<%= product.name %>"
+                  class="h-96 w-96 max-w-full object-cover rounded shadow"
+                />
+                <% } else { %>
+                <div class="h-96 w-96 max-w-full flex items-center justify-center rounded bg-base-200 opacity-70">No image</div>
+                <% } %>
+              </div>
+              <div class="flex-1">
+                <div class="text-sm md:text-base opacity-70 font-semibold">Thông tin chi tiết sản phẩm</div>
+                <h2 class="card-title text-4xl"><%= product.name %></h2>
+                <div class="mt-2 text-base md:text-lg opacity-70 space-y-1">
+                  <div><span class="font-semibold text-lg md:text-xl">ID:</span> <span class="text-lg md:text-xl"><%= product.id %></span></div>
+                  <div><span class="font-semibold text-lg md:text-xl">Price:</span> <span class="text-lg md:text-xl"><%= product.price %></span></div>
+                  <div><span class="font-semibold text-lg md:text-xl">In Stock:</span> <span class="text-lg md:text-xl"><%= product.unit_in_stock %></span></div>
+                </div>
+
+                <div class="mt-4 flex gap-2 flex-wrap">
+                  <a class="btn btn-primary" href="/products/<%= product.id %>/edit">Edit</a>
+                  <form method="POST" action="/products/<%= product.id %>/delete">
+                    <button class="btn btn-error" onclick="return confirm('Are you sure to delete this product?')">Delete</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%- include('../footer') %>
+
+  </body>
+</html>
+

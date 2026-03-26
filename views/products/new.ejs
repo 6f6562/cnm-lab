@@ -16,7 +16,7 @@
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/">Products</a></li>
-            <li>Edit</li>
+            <li>Add</li>
           </ul>
         </div>
         <% if (success) { %>
@@ -43,21 +43,21 @@
         </div>
         <% } %>
 
-        <form class="space-y-4" method="POST" action="/products/<%= product.id %>" enctype="multipart/form-data">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="label">
-                <span class="label-text">Name</span>
-              </label>
-              <input
-                class="input input-bordered w-full"
-                type="text"
-                name="name"
-                value="<%= product.name %>"
-                required
-              />
-            </div>
+        <form class="space-y-4" method="POST" action="/products" enctype="multipart/form-data">
+          <div>
+            <label class="label">
+              <span class="label-text">Name</span>
+            </label>
+            <input
+              class="input input-bordered w-full"
+              type="text"
+              name="name"
+              value="<%= product.name %>"
+              required
+            />
+          </div>
 
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="label">
                 <span class="label-text">Price</span>
@@ -71,7 +71,6 @@
                 required
               />
             </div>
-
             <div>
               <label class="label">
                 <span class="label-text">Unit In Stock</span>
@@ -85,34 +84,24 @@
                 required
               />
             </div>
-
-            <div>
-              <label class="label">
-              <span class="label-text">Image (bắt buộc để thay thế)</span>
-              </label>
-              <input
-                class="file-input file-input-bordered w-full"
-                type="file"
-                name="image"
-                accept="image/*"
-                required
-              />
-            </div>
           </div>
 
-          <div class="border rounded-box p-4">
-            <div class="font-bold mb-2">Current Image</div>
-            <% if (product.url_image) { %>
-            <img src="<%= product.url_image %>" alt="<%= product.name %>" class="h-40 w-40 object-cover rounded" />
-            <% } else { %>
-            <span class="opacity-60">No image</span>
-            <% } %>
-            <div class="text-sm opacity-70 mt-2">Bạn cần chọn ảnh mới để cập nhật.</div>
+          <div>
+            <label class="label">
+              <span class="label-text">Image (bắt buộc)</span>
+            </label>
+            <input
+              class="file-input file-input-bordered w-full"
+              type="file"
+              name="image"
+              accept="image/*"
+              required
+            />
           </div>
 
           <div class="flex gap-2">
-            <button class="btn btn-primary" type="submit">Update</button>
-            <a class="btn" href="/products/<%= product.id %>">Cancel</a>
+            <button class="btn btn-primary" type="submit">Create</button>
+            <a class="btn" href="/">Cancel</a>
           </div>
         </form>
       </div>
